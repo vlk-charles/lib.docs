@@ -4,7 +4,7 @@ If you are running **legacy kernel** and you want to switch to **vanilla**, **de
 
 		wget -q -O - http://upgrade.armbian.com | bash
 
-You will be prompted to select and confirm some actions. It's possible to upgrade **from any other distribution**. Note that this procedure upgrades only kernel with hardware definitions (bin, dtb, firmware and headers. Operating system and modifications remain as is.
+You will be prompted to select and confirm some actions. It's possible to upgrade **from any other distribution**. Note that this procedure upgrades only kernel with hardware definitions (bin, dtb, firmware and headers). Operating system and modifications remain as is.
 
 Check [this for manual way](http://www.armbian.com/kernel/) and more info.
 
@@ -12,11 +12,11 @@ Check [this for manual way](http://www.armbian.com/kernel/) and more info.
 
 # How to troubleshoot?
 
-**Important: If you came here since you can't get Armbian running on your board please keep in mind that in 95 percent of all cases it's either a faulty/fraud/counterfeit SD card or an insufficient power supply that's causing these sorts of _doesn't work_ issues!**
+**Important: If you came here since you can't get Armbian running on your board, please keep in mind that, in 95 percent of all cases, it's either a faulty/fraudulent/counterfeit SD card or an insufficient power supply that's causing these sorts of _doesn't work_ issues!**
 
-If you broke the system you can try to get in this way. You have to get to u-boot command prompt, using either a serial adapter or monitor and usb keyboard (USB support in u-boot currently not enabled on all H3 boards). 
+If you broke the system, you can try to get in this way. You have to get to U-Boot command prompt, using either a serial adapter or monitor and usb keyboard (USB support in U-Boot currently not enabled on all H3 boards).
 
-After switching power on or rebooting, when u-boot loads up, press some key on the keyboard (or send some key presses via terminal) to abort default boot sequence and get to the command prompt:
+After switching power on or rebooting, when U-Boot loads up, press some key on the keyboard (or send some key presses via terminal) to abort default boot sequence and get to the command prompt:
 
 	U-Boot SPL 2015.07-dirty (Oct 01 2015 - 15:05:21)
 	...
@@ -45,11 +45,11 @@ Now you can try to fix your broken system.
 
 # How to unbrick the system?
 
-When something goes terribly wrong and you are not able to boot the system, this is the way to proceed. You need some linux machine, where you can mount the failed SD card. With this procedure you will reinstall the u-boot, kernel and hardware settings. In most cases this should be enought to unbrick the board. It's recommended to issue a filesystem check before mounting:
+When something goes terribly wrong and you are not able to boot the system, this is the way to proceed. You need some Linux machine, where you can mount the failed SD card. With this procedure, you will reinstall the U-Boot, kernel and hardware settings. In most cases, this should be enought to unbrick the board. It's recommended to issue a filesystem check before mounting:
 
 	fsck /dev/sdX -f
 
-Than mount the SD card and download those files (This example is only for Banana R1): 
+Then mount the SD card and download those files (This example is only for Banana R1):
 
 	http://apt.armbian.com/pool/main/l/linux-trusty-root-next-lamobo-r1/linux-trusty-root-next-lamobo-r1_4.5_armhf.deb
 	http://apt.armbian.com/pool/main/l/linux-upstream/linux-image-next-sunxi_4.5_armhf.deb
@@ -58,7 +58,7 @@ Than mount the SD card and download those files (This example is only for Banana
 
 This is just an example for: **Ubuntu Trusty, Lamobo R1, Vanilla kernel** (next). Alter packages naming according to [this](http://forum.armbian.com/index.php/topic/211-kernel-update-procedure-has-been-changed/).
 
-Mount SD card and extract all those deb files to it's mount point.
+Mount SD card and extract all those deb files to it's mount point:
 
 	dpkg -x DEB_FILE /mnt 
 
@@ -68,18 +68,19 @@ Unmount SD card, move it to the board and power on.
 
 # How to build a wireless driver?
 
-Recreate kernel headers scripts (optional)
-	
+Recreate kernel headers scripts (optional):
+
 	cd /usr/src/linux-headers-$(uname -r)
 	make scripts
 
-Go back to root directory and fetch sources (working example, use ARCH=arm64 on 64bit system)
+Go back to root directory and fetch sources (working example, use ARCH=arm64 on 64bit system):
 
-	cd 		
+	cd
 	git clone https://github.com/pvaret/rtl8192cu-fixes.git
 	cd rtl8192cu-fixes
 	make ARCH=arm
-Load driver for test
+
+Load driver for test:
  
 	insmod 8192cu.ko
 
@@ -90,6 +91,7 @@ Check dmesg and the last entry will be:
 Plug the USB wireless adaptor and issue a command:
 
 	iwconfig wlan0
+
 You should see this:
 
 	wlan0   unassociated  Nickname:"<WIFI@REALTEK>"
@@ -102,11 +104,11 @@ You should see this:
 			Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
 			Tx excessive retries:0  Invalid misc:0   Missed beacon:0		  
 
-Check which wireless stations / routers are in range
+Check which wireless stations / routers are in range:
 
 	iwlist wlan0 scan | grep ESSID
 
-# How to freeze your filesystem? 
+# How to freeze your filesystem?
 
 In certain situations it is desirable to have a virtual read-only root filesystem. This prevents any changes from occurring on the root filesystem that may alter system behavior and it allows a simple reboot to restore a system to its clean state.
 
@@ -116,7 +118,7 @@ You need an ODROID XU4 or Allwinner A10, A20 or H3 board with legacy kernel wher
 	echo 'overlayroot="tmpfs"' >> /etc/overlayroot.conf
 	reboot
 
-After your system boots up it will always remain as is. If you want to make any permanent changes, you need to run: 
+After your system boots up, it will always remain as is. If you want to make any permanent changes, you need to run: 
 
 	overlayroot-chroot
 
@@ -126,7 +128,7 @@ Changes inside this will be preserved.
 
 Preinstallation requirements:
 
-- Armian 5.1 or newer with Kernel 3.10 or higher
+- Armbian 5.1 or newer with Kernel 3.10 or higher
 - Debian Jessie (might work elsewhere with some modifications)
 - root access
 
@@ -161,7 +163,7 @@ Realtek binary and configuration location:
 	/usr/sbin/hostapd-rt
 	/etc/hostapd.conf-rt
 
-Since its hard to define when to use which you always try both combinations in case of troubles. To start AP automatically:
+Since it's hard to define when to use which, you always try both combinations in case of troubles. To start AP automatically:
 
 1. Edit /etc/init.d/hostapd and add/alter location of your conf file **DAEMON_CONF=/etc/hostapd.conf** and binary **DAEMON_SBIN=/usr/sbin/hostapd**
 2. Link **/etc/network/interfaces.hostapd** to **/etc/network/interfaces**
@@ -171,20 +173,20 @@ Since its hard to define when to use which you always try both combinations in c
 
 # How to connect IR remote?
 
-Required conditions: 
+Required conditions:
 
 - IR hardware
 - loaded driver
 
 Get your [remote configuration](http://lirc.sourceforge.net/remotes/) (lircd.conf) or [learn](http://kodi.wiki/view/HOW-TO:Setup_Lirc#Learning_Commands). You are going to need the list of all possible commands which you can map to your IR remote keys:
-	
+
 	irrecord --list-namespace
 
-To start with learning process you need to delete old config:
-		
+To start the learning process, you need to delete old config:
+
 	rm /etc/lircd.conf 
 
-Than start the process with:
+Then start the process with:
 
 	irrecord --driver=default --device=/dev/lirc0 /etc/lircd.conf
 
@@ -195,4 +197,3 @@ And finally start your service when done with learning:
 Test your remote:
 
 	irw /dev/lircd
-****
