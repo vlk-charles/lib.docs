@@ -1,47 +1,47 @@
 # How to customize keyboard, time zone?
 
-keyboard: 
+Keyboard:
 
 	dpkg-reconfigure keyboard-configuration
-	
-system language:
+
+System language:
 
 	# Debian --> https://wiki.debian.org/ChangeLanguage
 	dpkg-reconfigure locales
 	# Ubuntu --> https://help.ubuntu.com/community/Locale
 	update-locale LANG=[options] && dpkg-reconfigure locales
 
-console font, codepage:
+Console font, codepage:
 
 	dpkg-reconfigure console-setup
 
-time zone: 
+Time zone:
 
 	dpkg-reconfigure tzdata
-	
-screen settings on H3 devices:
+
+Screen settings on H3 devices:
 
 	# Example to set resolution to 1920 x 1080, full colour-range and DVI
 	h3disp -m 1080p60 -d -c 1
 
-screen resolution on other boards: 
+Screen resolution on other boards:
 
-	nano /boot/boot.cmd 
+	nano /boot/boot.cmd
 
 	# example:
-	# change example from 
-	# disp.screen0_output_mode=1920x1080p60 
-	# to 
+	# change example from
+	# disp.screen0_output_mode=1920x1080p60
+	# to
 	# disp.screen0_output_mode=1280x720p60
 
-	mkimage -C none -A arm -T script -d /boot/boot.cmd /boot/boot.scr	
+	mkimage -C none -A arm -T script -d /boot/boot.cmd /boot/boot.scr
 
-screen resolution interactive - only Allwinner boards with A10 and A20 with legacy kernel:
-	
+Screen resolution interactive - only Allwinner boards with A10 and A20 with legacy kernel:
+
 	# Example to set console framebuffer resolution to 1280 x 720
 	a10disp changehdmimodeforce 4
 
-Other modes:	
+Other modes:
 
 	0 480i
 	1 576i
@@ -54,7 +54,7 @@ Other modes:
 	8 1080p 24 Hz
 	9 1080p 50 Hz
 	10 1080p 60 Hz
-	
+
 # How to alter CPU frequency?
 
 Some boards allow to adjust CPU speed.
@@ -74,7 +74,7 @@ Check [this site](http://namhuy.net/1085/install-gui-on-debian-7-wheezy.html) fo
 
 # How to upgrade Debian from Wheezy to Jessie?
 
-	dpkg -r ramlog	
+	dpkg -r ramlog
 	cp /etc/apt/sources.list{,.bak}
 	sed -i -e 's/ \(old-stable\|wheezy\)/ jessie/ig' /etc/apt/sources.list
 	apt-get update
@@ -90,9 +90,9 @@ Check [this site](http://namhuy.net/1085/install-gui-on-debian-7-wheezy.html) fo
 
 # How to downgrade a package via apt-get?
 
-This is useful when you need to fall back to previous kernel version. 
+This is useful when you need to fall back to previous kernel version.
 
-	apt-get install linux-image-sun8i=5.13 
+	apt-get install linux-image-sun8i=5.13
 
 This example is for H3 legacy kernel. Check [this page](http://www.armbian.com/kernel/) for others.
 
@@ -125,7 +125,7 @@ When computer behaves strange first step is to look into kernel logs. We made a 
 
 	sudo armbianmonitor -b
 	reboot
-	sudo armbianmonitor -u  
+	sudo armbianmonitor -u
 Copy and past URL of your log to the forum, mail, ...
 
 # How to change network configuration?
@@ -138,9 +138,9 @@ There are five predefined configurations, you can find them in those files:
 	/etc/network/interfaces.r1
 	/etc/network/interfaces.r1switch
 
-By default **/etc/network/interfaces** is symlinked to **/etc/network/interfaces.default**
+By default **/etc/network/interfaces** is symlinked to **/etc/network/interfaces.default**.
 
-1. DEFAULT: your network adapters are connected classical way. 
+1. DEFAULT: your network adapters are connected classical way.
 2. HOSTAPD: your network adapters are bridged together and bridge is connected to the network. This allows you to have your AP connected directly to your router.
 3. BONDING: your network adapters are bonded in fail safe / "notebook" way.
 4. Router configuration for Lamobo R1 / Banana R1.
@@ -152,7 +152,6 @@ You can switch configuration with re-linking.
 	ln -sf interfaces.x interfaces
 (x = default,hostapd,bonding,r1)
 
-Than check / alter your interfaces:
+Then check / alter your interfaces:
 
 	nano /etc/network/interfaces
-
