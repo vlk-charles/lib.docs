@@ -13,11 +13,11 @@ If you **need help**, and have read through Getting Started, check out [Troubles
 
 If you still can't find what you need here, visit the [Armbian forum](http://forum.armbian.com/), where your input can help improve this documentation.
 
-# What is Armbian? #
+# What is Armbian?
 
-- Lightweight Debian or Ubuntu based distribution specialized for ARM developing boards. [Compiled from scratch](https://github.com/igorpecovnik/lib),
-- It has powerfull build and software development tools,
-- A vibrant community. 
+- Lightweight Debian- or Ubuntu-based distribution specialized for ARM developing boards. [Compiled from scratch](https://github.com/igorpecovnik/lib).
+- It has powerful build and software development tools.
+- A vibrant community.
 
 # Supported chips
 
@@ -37,35 +37,35 @@ Check [download page](http://www.armbian.com/download/) for recently supported l
 
 # Common features
 
-- Debian Wheezy, Jessie or Ubuntu Trusty, Xenial based. Compiled from scratch,
-- Install images are reduced to actual data size with small reserve,
-- Root password is 1234. You will be prompted to change this password and to create a normal user at first login.
-- First boot takes longer (up to few minutes) than usual (20s) because it updates package list, regenerates SSH keys and expand partition to fit your SD card. It might reboot one time automatically.
+- Based on Debian Wheezy, Jessie or Ubuntu Trusty, Xenial compiled from scratch.
+- Install images are reduced to actual data size with small reserve.
+- Root password is _1234_. You will be prompted to change this password and to create a normal user at first login.
+- First boot takes longer (up to few minutes) than usual (20s) because it updates package list, regenerates SSH keys and expands partition to fit your SD card. It might reboot one time automatically.
 - [Ready to compile external modules](User-Guide_Advanced-Features/#how-to-build-a-wireless-driver)
 - Ethernet adapter with DHCP and SSH server ready on default port (22)
 - Wireless adapter with DHCP ready if present but disabled (/etc/network/interfaces, WPA2: normal connect or AP mode)
-- desktop environment upgrade ready
-- NAND, SATA, eMMC and USB install script is included (nand-sata-install)
+- Desktop environment upgrade ready
+- NAND, SATA, eMMC and USB install script is included (_nand-sata-install_).
 - Serial console enabled
-- Enabled automatic security update download for basic system and kernel. Upgrades are done via standard apt-get upgrade method
+- Enabled automatic security update download for basic system and kernel. Upgrades are done via standard _apt-get upgrade_ method.
 - Login script shows: board name with large text, distribution base, kernel version, system load, up time, memory usage, IP address, CPU temp, drive temp, ambient temp from Temper if exits, SD card usage, battery conditions and number of updates to install.
 
 # Performance tweaks
 
 - /tmp & /log = RAM, ramlog app saves logs to disk daily and on shut-down (Wheezy and Jessie w/o systemd)
-- automatic IO scheduler. (check /etc/init.d/armhwinfo)
-- journal data writeback enabled. (/etc/fstab)
+- automatic I/O scheduler (check /etc/init.d/armhwinfo)
+- journal data writeback enabled (/etc/fstab)
 - commit=600 to flush data to the disk every 10 minutes (/etc/fstab)
 - optimized CPU frequency scaling with interactive governor (/etc/init.d/cpufrequtils)
 	- 480-1010Mhz @Allwinner A10/A20
 	- 480-1260Mhz @Allwinner H3
 	- 392-996Mhz @Freescale imx
 	- 600-2000Mhz @Exynos & S905
-- eth0 interrupts are using dedicated core (Allwinner based boards)
+- eth0 interrupts are using dedicated core (Allwinner-based boards)
 
 ![YOUTUBE](6K9zJULoFpU)
 
-# Get Involved! #
+# Get Involved!
 
 * [Contribute](Process_Contribute)
 * [Community](http://forum.armbian.com)
